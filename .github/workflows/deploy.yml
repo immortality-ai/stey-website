@@ -50,7 +50,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
       name: production
-      url: ${{ steps.get-url.outputs.url }}
+      url: ${{ steps.get-url.outputs.cdnUrl }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -84,8 +84,10 @@ jobs:
             --parameters environment=prod \
             --query properties.outputs -o json)
 
-          STORAGE_ACCOUNT=$(echo $DEPLOYMENT_OUTPUT | jq -r '.storageAccountName.value')
-          echo "storageAccountName=$STORAGE_ACCOUNT" >> $GITHUB_OUTPUT
+          echo "storageAccountName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.storageAccountName.value')" >> $GITHUB_OUTPUT
+          echo "cdnEndpointHostname=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnEndpointHostname.value')" >> $GITHUB_OUTPUT
+          echo "cdnProfileName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnProfileName.value')" >> $GITHUB_OUTPUT
+          echo "cdnEndpointName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnEndpointName.value')" >> $GITHUB_OUTPUT
 
       - name: Enable Static Website
         run: |
@@ -103,15 +105,32 @@ jobs:
             --source dist/ \
             --overwrite
 
-      - name: Get Website URL
+      - name: Purge CDN Cache
+        run: |
+          az cdn endpoint purge \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --profile-name ${{ steps.deploy-infra.outputs.cdnProfileName }} \
+            --name ${{ steps.deploy-infra.outputs.cdnEndpointName }} \
+            --content-paths '/*'
+
+      - name: Get URLs
         id: get-url
         run: |
-          URL=$(az storage account show \
+          STORAGE_URL=$(az storage account show \
             --name ${{ steps.deploy-infra.outputs.storageAccountName }} \
             --query "primaryEndpoints.web" -o tsv)
-          echo "url=$URL" >> $GITHUB_OUTPUT
+          CDN_URL="https://${{ steps.deploy-infra.outputs.cdnEndpointHostname }}"
+
+          echo "storageUrl=$STORAGE_URL" >> $GITHUB_OUTPUT
+          echo "cdnUrl=$CDN_URL" >> $GITHUB_OUTPUT
+
           echo "## 🚀 Deployment Complete!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Website URL:** $URL" >> $GITHUB_STEP_SUMMARY
+          echo "**CDN URL:** $CDN_URL" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Storage Account:** ${{ steps.deploy-infra.outputs.storageAccountName }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Storage URL:** $STORAGE_URL" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Custom Domain Setup" >> $GITHUB_STEP_SUMMARY
+          echo "Add this CNAME record in your DNS:" >> $GITHUB_STEP_SUMMARY
+          echo "- **www** → \`${{ steps.deploy-infra.outputs.cdnEndpointHostname }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **@** (root) → \`${{ steps.deploy-infra.outputs.cdnEndpointHostname }}\` (use ALIAS if available)" >> $GITHUB_STEP_SUMMARY
