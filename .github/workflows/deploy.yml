@@ -85,9 +85,9 @@ jobs:
             --query properties.outputs -o json)
 
           echo "storageAccountName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.storageAccountName.value')" >> $GITHUB_OUTPUT
-          echo "cdnEndpointHostname=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnEndpointHostname.value')" >> $GITHUB_OUTPUT
-          echo "cdnProfileName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnProfileName.value')" >> $GITHUB_OUTPUT
-          echo "cdnEndpointName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnEndpointName.value')" >> $GITHUB_OUTPUT
+          echo "frontDoorEndpointHostname=$(echo $DEPLOYMENT_OUTPUT | jq -r '.frontDoorEndpointHostname.value')" >> $GITHUB_OUTPUT
+          echo "frontDoorProfileName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.frontDoorProfileName.value')" >> $GITHUB_OUTPUT
+          echo "frontDoorEndpointName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.frontDoorEndpointName.value')" >> $GITHUB_OUTPUT
 
       - name: Enable Static Website
         run: |
@@ -105,12 +105,12 @@ jobs:
             --source dist/ \
             --overwrite
 
-      - name: Purge CDN Cache
+      - name: Purge Front Door Cache
         run: |
-          az cdn endpoint purge \
+          az afd endpoint purge \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --profile-name ${{ steps.deploy-infra.outputs.cdnProfileName }} \
-            --name ${{ steps.deploy-infra.outputs.cdnEndpointName }} \
+            --profile-name ${{ steps.deploy-infra.outputs.frontDoorProfileName }} \
+            --endpoint-name ${{ steps.deploy-infra.outputs.frontDoorEndpointName }} \
             --content-paths '/*'
 
       - name: Get URLs
@@ -119,18 +119,18 @@ jobs:
           STORAGE_URL=$(az storage account show \
             --name ${{ steps.deploy-infra.outputs.storageAccountName }} \
             --query "primaryEndpoints.web" -o tsv)
-          CDN_URL="https://${{ steps.deploy-infra.outputs.cdnEndpointHostname }}"
+          FD_URL="https://${{ steps.deploy-infra.outputs.frontDoorEndpointHostname }}"
 
           echo "storageUrl=$STORAGE_URL" >> $GITHUB_OUTPUT
-          echo "cdnUrl=$CDN_URL" >> $GITHUB_OUTPUT
+          echo "cdnUrl=$FD_URL" >> $GITHUB_OUTPUT
 
           echo "## 🚀 Deployment Complete!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**CDN URL:** $CDN_URL" >> $GITHUB_STEP_SUMMARY
+          echo "**Front Door URL:** $FD_URL" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Storage URL:** $STORAGE_URL" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Custom Domain Setup" >> $GITHUB_STEP_SUMMARY
           echo "Add this CNAME record in your DNS:" >> $GITHUB_STEP_SUMMARY
-          echo "- **www** → \`${{ steps.deploy-infra.outputs.cdnEndpointHostname }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **@** (root) → \`${{ steps.deploy-infra.outputs.cdnEndpointHostname }}\` (use ALIAS if available)" >> $GITHUB_STEP_SUMMARY
+          echo "- **www** → \`${{ steps.deploy-infra.outputs.frontDoorEndpointHostname }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **@** (root) → \`${{ steps.deploy-infra.outputs.frontDoorEndpointHostname }}\` (use ALIAS if available)" >> $GITHUB_STEP_SUMMARY
