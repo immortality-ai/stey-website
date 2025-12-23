@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Press Kit — Stey">
+  <Header />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="section-padding">
+      <div class="container-narrow">
+        <p class="text-ember text-sm tracking-[0.3em] uppercase mb-4">Press Kit</p>
+        <h1 class="heading-lg mb-6">Everything you need to tell our story.</h1>
+        <p class="body-lg text-parchment-muted">
+          Logos, screenshots, brand guidelines, and key facts for journalists and content creators.
+        </p>
+      </div>
+    </section>
+
+    <!-- Quick Facts -->
+    <section class="section-padding pt-0">
+      <div class="container-narrow">
+        <div class="bg-void-50 p-8 md:p-10 border border-void-200 mb-12">
+          <h2 class="text-2xl font-serif mb-6">Quick Facts</h2>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <p class="text-parchment-muted text-sm mb-1">Product</p>
+              <p class="body-md">Stey — Voice Memory Preservation App</p>
+            </div>
+            <div>
+              <p class="text-parchment-muted text-sm mb-1">Platform</p>
+              <p class="body-md">iOS (Android coming soon)</p>
+            </div>
+            <div>
+              <p class="text-parchment-muted text-sm mb-1">Price</p>
+              <p class="body-md">Free</p>
+            </div>
+            <div>
+              <p class="text-parchment-muted text-sm mb-1">Launch</p>
+              <p class="body-md">2025</p>
+            </div>
+            <div>
+              <p class="text-parchment-muted text-sm mb-1">Key Feature</p>
+              <p class="body-md">100% On-Device AI Processing</p>
+            </div>
+            <div>
+              <p class="text-parchment-muted text-sm mb-1">Contact</p>
+              <p class="body-md"><a href="mailto:press@stey.app" class="text-ember hover:underline">press@stey.app</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Boilerplate -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-serif mb-4">About Stey</h2>
+          <div class="space-y-4 body-md">
+            <p>
+              <strong>Short (50 words):</strong> Stey is a free iOS app that helps people preserve their voice memories, stories, and wisdom for future generations. Using on-device AI, Stey transcribes and organizes memories while keeping everything 100% private — no data ever leaves your phone.
+            </p>
+            <p>
+              <strong>Long (100 words):</strong> Stey is a voice-first memory preservation app designed to help people capture their stories, wisdom, and love for those who matter most. Unlike cloud-based alternatives, Stey processes everything using on-device AI — your voice recordings, transcriptions, and personal content never leave your phone. The app uses Whisper for speech recognition and a local language model to understand context and emotion, automatically organizing memories into a searchable archive. Built for families preserving generational wisdom, professionals documenting expertise, and anyone who wants their voice to live on, Stey is available free on iOS with Android coming soon.
+            </p>
+          </div>
+        </div>
+
+        <div class="divider my-12"></div>
+
+        <!-- Brand Assets -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-serif mb-6">Brand Assets</h2>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <!-- Logo -->
+            <div class="bg-void-50 p-6 border border-void-200">
+              <div class="aspect-square bg-void flex items-center justify-center mb-4 border border-void-200">
+                <span class="text-4xl font-serif text-ember">Stey</span>
+              </div>
+              <h3 class="font-serif text-lg mb-2">Logo</h3>
+              <p class="text-sm text-parchment-muted mb-4">Primary logo in light and dark variants</p>
+              <a href="#" class="text-ember hover:underline text-sm">Download PNG & SVG →</a>
+            </div>
+
+            <!-- App Icon -->
+            <div class="bg-void-50 p-6 border border-void-200">
+              <div class="aspect-square bg-ember/20 flex items-center justify-center mb-4 border border-void-200 rounded-2xl">
+                <span class="text-4xl font-serif text-ember">S</span>
+              </div>
+              <h3 class="font-serif text-lg mb-2">App Icon</h3>
+              <p class="text-sm text-parchment-muted mb-4">iOS app icon in all required sizes</p>
+              <a href="#" class="text-ember hover:underline text-sm">Download Icon Pack →</a>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="bg-void-50 p-6 border border-void-200">
+              <div class="aspect-video bg-void flex items-center justify-center mb-4 border border-void-200">
+                <svg class="w-8 h-8 text-void-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="font-serif text-lg mb-2">Screenshots</h3>
+              <p class="text-sm text-parchment-muted mb-4">App screenshots for press and marketing</p>
+              <a href="#" class="text-ember hover:underline text-sm">Download Screenshots →</a>
+            </div>
+
+            <!-- Brand Guidelines -->
+            <div class="bg-void-50 p-6 border border-void-200">
+              <div class="aspect-video bg-void flex items-center justify-center mb-4 border border-void-200">
+                <div class="flex gap-2">
+                  <div class="w-8 h-8 bg-ember rounded"></div>
+                  <div class="w-8 h-8 bg-parchment rounded"></div>
+                  <div class="w-8 h-8 bg-void-50 border border-void-200 rounded"></div>
+                </div>
+              </div>
+              <h3 class="font-serif text-lg mb-2">Brand Guidelines</h3>
+              <p class="text-sm text-parchment-muted mb-4">Colors, typography, and usage rules</p>
+              <a href="#" class="text-ember hover:underline text-sm">Download PDF →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider my-12"></div>
+
+        <!-- Color Palette -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-serif mb-6">Color Palette</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div>
+              <div class="aspect-square bg-void border border-void-200 mb-2"></div>
+              <p class="text-sm font-medium">Void</p>
+              <p class="text-xs text-parchment-muted">#0a0a0a</p>
+            </div>
+            <div>
+              <div class="aspect-square bg-ember mb-2"></div>
+              <p class="text-sm font-medium">Ember</p>
+              <p class="text-xs text-parchment-muted">#d4a574</p>
+            </div>
+            <div>
+              <div class="aspect-square bg-parchment mb-2"></div>
+              <p class="text-sm font-medium">Parchment</p>
+              <p class="text-xs text-parchment-muted">#f5f0e8</p>
+            </div>
+            <div>
+              <div class="aspect-square bg-void-50 border border-void-200 mb-2"></div>
+              <p class="text-sm font-medium">Void 50</p>
+              <p class="text-xs text-parchment-muted">#171717</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider my-12"></div>
+
+        <!-- Key Messages -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-serif mb-6">Key Messages</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-1">→</span>
+              <span class="body-md"><strong>Privacy-first:</strong> All AI processing happens on-device. No data is ever sent to servers.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-1">→</span>
+              <span class="body-md"><strong>Voice-first:</strong> Designed for natural speech, making it easy for anyone to capture memories.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-1">→</span>
+              <span class="body-md"><strong>Legacy-focused:</strong> Built for people who want their voice to live on for future generations.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-ember mt-1">→</span>
+              <span class="body-md"><strong>Free forever:</strong> Core features will always be free because everyone deserves to preserve their legacy.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="divider my-12"></div>
+
+        <!-- Contact -->
+        <div class="bg-void-50 p-8 border border-ember/30 text-center">
+          <h2 class="text-2xl font-serif mb-4">Media Inquiries</h2>
+          <p class="body-md text-parchment-muted mb-6">
+            For interviews, review copies, or additional information, please contact our press team.
+          </p>
+          <a href="mailto:press@stey.app" class="inline-flex items-center gap-2 text-ember hover:underline">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            press@stey.app
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

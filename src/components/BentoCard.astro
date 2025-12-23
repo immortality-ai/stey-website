@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  size?: 'sm' | 'md' | 'lg' | 'wide' | 'tall';
+  featured?: boolean;
+  class?: string;
+}
+
+const { title, description, icon, size = 'md', featured = false, class: className = '' } = Astro.props;
+
+const sizeClasses = {
+  sm: '',
+  md: '',
+  lg: 'md:col-span-2 md:row-span-2',
+  wide: 'md:col-span-2',
+  tall: 'md:row-span-2',
+};
+---
+
+<div class={`${featured ? 'bento-card-featured' : 'bento-card'} ${sizeClasses[size]} flex flex-col ${className}`}>
+  {icon && (
+    <div class="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center mb-4">
+      <span class="text-2xl">{icon}</span>
+    </div>
+  )}
+  <h3 class="text-lg font-semibold text-surface-900 dark:text-surface-100 mb-2">{title}</h3>
+  <p class="text-surface-600 dark:text-surface-400 text-sm leading-relaxed flex-grow">{description}</p>
+  <slot />
+</div>

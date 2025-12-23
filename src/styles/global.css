@@ -1,0 +1,82 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-void text-parchment antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  ::selection {
+    @apply bg-ember/30 text-parchment;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .heading-xl {
+    @apply font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.9];
+  }
+
+  .heading-lg {
+    @apply font-serif text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[0.95];
+  }
+
+  .heading-md {
+    @apply font-serif text-3xl sm:text-4xl tracking-tight leading-tight;
+  }
+
+  .body-lg {
+    @apply font-sans text-lg sm:text-xl text-parchment-muted leading-relaxed;
+  }
+
+  .body-md {
+    @apply font-sans text-base text-parchment-muted leading-relaxed;
+  }
+
+  .link-subtle {
+    @apply text-parchment-muted hover:text-parchment transition-colors duration-300;
+  }
+
+  .link-ember {
+    @apply text-ember hover:text-ember-200 transition-colors duration-300;
+  }
+
+  .divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-void-300 to-transparent;
+  }
+
+  .section-padding {
+    @apply py-24 sm:py-32 md:py-40;
+  }
+
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-6;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto px-6;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-parchment to-ember bg-clip-text text-transparent;
+  }
+}

@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About — Stey">
+  <Header />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="section-padding">
+      <div class="container-narrow">
+        <p class="text-ember text-sm tracking-[0.3em] uppercase mb-4">Our Story</p>
+        <h1 class="heading-lg mb-8">
+          Built from a<br/>
+          <span class="text-ember">simple regret.</span>
+        </h1>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="section-padding pt-0">
+      <div class="container-narrow">
+        <div class="prose prose-lg max-w-none">
+          <p class="text-xl font-serif text-parchment leading-relaxed mb-8">
+            When my grandfather passed, I realized I could barely remember his voice. The stories he told at dinner, the advice he gave, the way he laughed — all fading faster than I expected.
+          </p>
+
+          <p class="body-lg mb-8">
+            I had thousands of photos. A few videos. But his voice? His thoughts? His wisdom accumulated over 80 years? Gone. I wished I had recorded just one conversation. Just one.
+          </p>
+
+          <p class="body-lg mb-8">
+            That regret became Stey.
+          </p>
+
+          <p class="body-lg mb-8">
+            We built an app that makes preserving your voice as easy as speaking. No complicated setup, no cloud accounts, no privacy concerns. Just press record and talk — like you're speaking to someone you love.
+          </p>
+
+          <p class="body-lg mb-12">
+            The AI runs entirely on your device because your most intimate thoughts deserve absolute privacy. We can't see your memories. We don't want to. They're yours.
+          </p>
+        </div>
+
+        <div class="divider my-16"></div>
+
+        <!-- Mission -->
+        <div class="text-center mb-16">
+          <h2 class="heading-md mb-6">Our Mission</h2>
+          <p class="text-2xl font-serif text-parchment max-w-2xl mx-auto">
+            To ensure that the people who matter most can hear your voice, know your story, and feel your presence — long after you're gone.
+          </p>
+        </div>
+
+        <div class="divider my-16"></div>
+
+        <!-- Values -->
+        <div class="mb-16">
+          <h2 class="heading-md mb-12 text-center">What We Believe</h2>
+
+          <div class="grid sm:grid-cols-2 gap-8">
+            <div class="bg-void-50 p-8 border border-void-200">
+              <h3 class="text-xl font-serif text-ember mb-4">Privacy is non-negotiable</h3>
+              <p class="body-md">
+                Your memories are sacred. We process everything on-device because it's the right thing to do, even though it's harder to build.
+              </p>
+            </div>
+
+            <div class="bg-void-50 p-8 border border-void-200">
+              <h3 class="text-xl font-serif text-ember mb-4">Simplicity over features</h3>
+              <p class="body-md">
+                The best app is one you actually use. We'd rather do a few things beautifully than many things poorly.
+              </p>
+            </div>
+
+            <div class="bg-void-50 p-8 border border-void-200">
+              <h3 class="text-xl font-serif text-ember mb-4">Legacy for everyone</h3>
+              <p class="body-md">
+                Preserving memories shouldn't be a luxury. The core of Stey will always be free because everyone deserves to be remembered.
+              </p>
+            </div>
+
+            <div class="bg-void-50 p-8 border border-void-200">
+              <h3 class="text-xl font-serif text-ember mb-4">Built with intention</h3>
+              <p class="body-md">
+                We're not trying to capture your attention or monetize your data. We want to help you create something meaningful.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider my-16"></div>
+
+        <!-- Technology -->
+        <div class="mb-16">
+          <h2 class="heading-md mb-8 text-center">How It Works</h2>
+          <p class="body-lg text-center max-w-2xl mx-auto mb-12">
+            Stey uses cutting-edge on-device AI to transcribe, understand, and organize your memories — without ever sending data to the cloud.
+          </p>
+
+          <div class="grid sm:grid-cols-3 gap-8 text-center">
+            <div>
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full border border-ember/30 flex items-center justify-center">
+                <svg class="w-7 h-7 text-ember" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+              </div>
+              <h3 class="font-serif text-lg mb-2">Whisper AI</h3>
+              <p class="body-sm text-parchment-muted">State-of-the-art speech recognition, running locally on your device</p>
+            </div>
+
+            <div>
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full border border-ember/30 flex items-center justify-center">
+                <svg class="w-7 h-7 text-ember" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <h3 class="font-serif text-lg mb-2">Local LLM</h3>
+              <p class="body-sm text-parchment-muted">On-device language model understands context and emotion</p>
+            </div>
+
+            <div>
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full border border-ember/30 flex items-center justify-center">
+                <svg class="w-7 h-7 text-ember" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 class="font-serif text-lg mb-2">Encrypted Storage</h3>
+              <p class="body-sm text-parchment-muted">Your data never leaves your device, protected by biometrics</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding bg-void-50">
+      <div class="container-narrow text-center">
+        <h2 class="heading-md mb-6">Join us in preserving what matters.</h2>
+        <p class="body-lg mb-8 text-parchment-muted">Start recording your legacy today.</p>
+        <a href="#" class="inline-flex items-center gap-3 bg-parchment text-void px-8 py-4 font-medium hover:bg-ember transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          Download for iOS — Free
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

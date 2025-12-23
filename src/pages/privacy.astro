@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = "December 23, 2025";
+---
+
+<Layout title="Privacy Policy — Stey">
+  <Header currentPage="/privacy" />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="section-padding">
+      <div class="container-narrow">
+        <h1 class="heading-lg mb-6 text-center">Privacy Policy</h1>
+        <p class="text-center text-parchment-muted mb-12">Last updated: {lastUpdated}</p>
+
+        <div class="divider mb-16"></div>
+
+        <!-- Content -->
+        <div class="prose prose-invert max-w-none space-y-12">
+
+          <!-- TL;DR -->
+          <section class="bg-void-50 p-8 rounded-lg border border-void-200">
+            <h2 class="text-2xl font-serif mb-4 text-ember">The short version</h2>
+            <p class="body-lg">
+              Your data never leaves your device. We can't see it. We don't want to. That's by design.
+            </p>
+          </section>
+
+          <!-- Our Philosophy -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">Our Philosophy</h2>
+            <p class="body-md mb-4">
+              Stey was built on a simple belief: your most personal thoughts, memories, and voice recordings should belong to you and only you.
+            </p>
+            <p class="body-md">
+              We chose to process everything on-device — not because it's easier (it's not), but because it's right.
+            </p>
+          </section>
+
+          <!-- What We Don't Collect -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">What We Don't Collect</h2>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">✕</span>
+                <span class="body-md">Your voice recordings</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">✕</span>
+                <span class="body-md">Your transcribed memories</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">✕</span>
+                <span class="body-md">Names of people you mention</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">✕</span>
+                <span class="body-md">Any content you create in the app</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">✕</span>
+                <span class="body-md">Location data</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">✕</span>
+                <span class="body-md">Contact information from your phone</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- What We May Collect -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">What We May Collect</h2>
+            <p class="body-md mb-4">
+              To improve the app and fix crashes, we may collect:
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">○</span>
+                <span class="body-md"><strong>Crash reports</strong> — Anonymous technical data when the app crashes (via Sentry)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">○</span>
+                <span class="body-md"><strong>App version</strong> — Which version you're using</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">○</span>
+                <span class="body-md"><strong>Device type</strong> — iPhone model and iOS version</span>
+              </li>
+            </ul>
+            <p class="body-md mt-4 text-parchment-dark">
+              None of this data includes your personal content. Ever.
+            </p>
+          </section>
+
+          <!-- On-Device Processing -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">On-Device Processing</h2>
+            <p class="body-md mb-4">
+              Stey uses on-device AI for:
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Speech-to-text</strong> — Your voice is transcribed locally using Whisper</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Memory analysis</strong> — Understanding context and emotion using local LLM</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Organization</strong> — Categorizing your memories locally</span>
+              </li>
+            </ul>
+            <p class="body-md mt-4">
+              No audio or text is ever sent to external servers for processing.
+            </p>
+          </section>
+
+          <!-- Data Storage -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">Data Storage</h2>
+            <p class="body-md mb-4">
+              All your data is stored locally on your device in an encrypted database. We do not have access to this data.
+            </p>
+            <p class="body-md">
+              If you enable iCloud backup for your device, your Stey data may be included in that backup. This is controlled by your iOS settings, not by Stey.
+            </p>
+          </section>
+
+          <!-- GDPR -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">GDPR & Your Rights</h2>
+            <p class="body-md mb-4">
+              Under GDPR and similar regulations, you have the right to:
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Access</strong> — All your data is already on your device, fully accessible to you</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Export</strong> — Export all your data anytime from within the app</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Delete</strong> — Delete all data from the app settings</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-ember mt-1">→</span>
+                <span class="body-md"><strong>Portability</strong> — Your exported data is in standard formats you can use elsewhere</span>
+              </li>
+            </ul>
+            <p class="body-md mt-4">
+              Since we don't store your personal data on our servers, there's nothing for us to delete or provide — it's already entirely in your hands.
+            </p>
+          </section>
+
+          <!-- Children -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">Children's Privacy</h2>
+            <p class="body-md">
+              Stey is not intended for children under 13. We do not knowingly collect any information from children under 13.
+            </p>
+          </section>
+
+          <!-- Changes -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">Changes to This Policy</h2>
+            <p class="body-md">
+              If we update this privacy policy, we will post the changes here and update the "Last updated" date. For significant changes, we may also notify you through the app.
+            </p>
+          </section>
+
+          <!-- Contact -->
+          <section>
+            <h2 class="text-2xl font-serif mb-4">Contact</h2>
+            <p class="body-md">
+              Questions about privacy? Reach us at <a href="mailto:privacy@stey.app" class="text-ember hover:underline">privacy@stey.app</a>
+            </p>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

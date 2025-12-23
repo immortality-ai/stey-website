@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const releases = [
+  {
+    version: '1.0.0',
+    date: 'December 2025',
+    tag: 'Latest',
+    changes: [
+      { type: 'new', text: 'Initial public release' },
+      { type: 'new', text: 'Voice recording with on-device Whisper transcription' },
+      { type: 'new', text: 'AI-powered memory analysis and organization' },
+      { type: 'new', text: 'Guided prompts library with 100+ questions' },
+      { type: 'new', text: 'People and relationship tracking' },
+      { type: 'new', text: 'Biometric authentication (Face ID / Touch ID)' },
+      { type: 'new', text: 'Export to JSON and CSV' },
+      { type: 'new', text: 'Full offline functionality' },
+    ],
+  },
+  {
+    version: '0.9.0',
+    date: 'November 2025',
+    tag: 'Beta',
+    changes: [
+      { type: 'new', text: 'Beta release for TestFlight users' },
+      { type: 'new', text: 'Core recording and transcription features' },
+      { type: 'improved', text: 'Memory organization UI' },
+      { type: 'fixed', text: 'Audio playback issues on iPhone 15' },
+    ],
+  },
+  {
+    version: '0.5.0',
+    date: 'October 2025',
+    tag: 'Alpha',
+    changes: [
+      { type: 'new', text: 'Alpha release for internal testing' },
+      { type: 'new', text: 'Basic voice recording' },
+      { type: 'new', text: 'On-device transcription prototype' },
+    ],
+  },
+];
+
+const typeStyles = {
+  new: { label: 'New', class: 'bg-emerald-500/20 text-emerald-400' },
+  improved: { label: 'Improved', class: 'bg-blue-500/20 text-blue-400' },
+  fixed: { label: 'Fixed', class: 'bg-amber-500/20 text-amber-400' },
+};
+---
+
+<Layout title="Changelog — Stey">
+  <Header />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="section-padding">
+      <div class="container-narrow">
+        <p class="text-ember text-sm tracking-[0.3em] uppercase mb-4">Changelog</p>
+        <h1 class="heading-lg mb-6">What's new in Stey.</h1>
+        <p class="body-lg text-parchment-muted">
+          A complete history of updates, improvements, and fixes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section-padding pt-0">
+      <div class="container-narrow">
+        <div class="space-y-12">
+          {releases.map((release, index) => (
+            <div class="relative">
+              {/* Timeline line */}
+              {index !== releases.length - 1 && (
+                <div class="absolute left-[11px] top-10 bottom-0 w-px bg-void-200 -mb-12"></div>
+              )}
+
+              <div class="flex gap-6">
+                {/* Timeline dot */}
+                <div class="relative">
+                  <div class={`w-6 h-6 rounded-full border-2 ${index === 0 ? 'bg-ember border-ember' : 'bg-void border-void-200'}`}></div>
+                </div>
+
+                {/* Content */}
+                <div class="flex-1 pb-12">
+                  <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <h2 class="text-2xl font-serif">v{release.version}</h2>
+                    {release.tag && (
+                      <span class={`text-xs px-2 py-1 rounded ${index === 0 ? 'bg-ember/20 text-ember' : 'bg-void-200 text-parchment-muted'}`}>
+                        {release.tag}
+                      </span>
+                    )}
+                    <span class="text-parchment-muted text-sm">{release.date}</span>
+                  </div>
+
+                  <ul class="space-y-3">
+                    {release.changes.map((change) => (
+                      <li class="flex items-start gap-3">
+                        <span class={`text-xs px-2 py-0.5 rounded ${typeStyles[change.type].class}`}>
+                          {typeStyles[change.type].label}
+                        </span>
+                        <span class="body-md">{change.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscribe -->
+    <section class="section-padding bg-void-50">
+      <div class="container-narrow text-center">
+        <h2 class="heading-md mb-4">Stay updated</h2>
+        <p class="body-lg text-parchment-muted mb-8">
+          Get notified when we release new features and updates.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="your@email.com"
+            class="flex-1 bg-void border border-void-200 px-4 py-3 text-parchment placeholder-parchment-dark focus:border-ember focus:outline-none"
+          />
+          <button type="submit" class="bg-parchment text-void px-6 py-3 font-medium hover:bg-ember transition-colors">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

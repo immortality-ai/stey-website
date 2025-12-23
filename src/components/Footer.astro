@@ -1,0 +1,15 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-12 border-t border-void-200">
+  <div class="container-wide flex flex-col sm:flex-row items-center justify-between gap-6">
+    <a href="/" class="font-serif text-parchment">Stey</a>
+    <div class="flex items-center gap-8 text-sm">
+      <a href="/features" class="link-subtle">Features</a>
+      <a href="/privacy" class="link-subtle">Privacy</a>
+      <a href="/terms" class="link-subtle">Terms</a>
+    </div>
+    <p class="text-parchment-dark text-sm">© {currentYear}</p>
+  </div>
+</footer>
