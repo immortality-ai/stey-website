@@ -7,5 +7,15 @@ export default defineConfig({
   integrations: [tailwind({
     configFile: './tailwind.config.mjs',
   })],
-  site: 'https://immortality.app',
+  site: 'https://stey.app',
+  output: 'static',
+  build: {
+    assets: 'assets',
+  },
+  compressHTML: true,
+  vite: {
+    build: {
+      cssMinify: true,
+    },
+  },
 });
