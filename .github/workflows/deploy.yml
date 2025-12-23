@@ -43,18 +43,23 @@ jobs:
           path: dist/
           retention-days: 1
 
-  deploy-infra:
-    name: Deploy Infrastructure
+  deploy:
+    name: Deploy to Azure
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    outputs:
-      storageAccountName: ${{ steps.deploy.outputs.storageAccountName }}
-      cdnEndpointUrl: ${{ steps.deploy.outputs.cdnEndpointUrl }}
-      cdnEndpointHostname: ${{ steps.deploy.outputs.cdnEndpointHostname }}
+    environment:
+      name: production
+      url: ${{ steps.get-url.outputs.url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
       - name: Azure Login
         uses: azure/login@v2
@@ -70,8 +75,8 @@ jobs:
             --location ${{ env.AZURE_LOCATION }} \
             --tags environment=prod project=stey-website
 
-      - name: Deploy Bicep
-        id: deploy
+      - name: Deploy Infrastructure
+        id: deploy-infra
         run: |
           DEPLOYMENT_OUTPUT=$(az deployment group create \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
@@ -79,53 +84,34 @@ jobs:
             --parameters environment=prod \
             --query properties.outputs -o json)
 
-          echo "storageAccountName=$(echo $DEPLOYMENT_OUTPUT | jq -r '.storageAccountName.value')" >> $GITHUB_OUTPUT
-          echo "cdnEndpointUrl=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnEndpointUrl.value')" >> $GITHUB_OUTPUT
-          echo "cdnEndpointHostname=$(echo $DEPLOYMENT_OUTPUT | jq -r '.cdnEndpointHostname.value')" >> $GITHUB_OUTPUT
+          STORAGE_ACCOUNT=$(echo $DEPLOYMENT_OUTPUT | jq -r '.storageAccountName.value')
+          echo "storageAccountName=$STORAGE_ACCOUNT" >> $GITHUB_OUTPUT
 
-  deploy-website:
-    name: Deploy Website
-    runs-on: ubuntu-latest
-    needs: [build, deploy-infra]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    environment:
-      name: production
-      url: ${{ needs.deploy-infra.outputs.cdnEndpointUrl }}
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Enable Static Website
+        run: |
+          az storage blob service-properties update \
+            --account-name ${{ steps.deploy-infra.outputs.storageAccountName }} \
+            --static-website \
+            --index-document index.html \
+            --404-document 404.html
 
       - name: Upload to Azure Blob Storage
         run: |
           az storage blob upload-batch \
-            --account-name ${{ needs.deploy-infra.outputs.storageAccountName }} \
+            --account-name ${{ steps.deploy-infra.outputs.storageAccountName }} \
             --destination '$web' \
             --source dist/ \
-            --overwrite \
-            --auth-mode login
+            --overwrite
 
-      - name: Purge CDN Cache
+      - name: Get Website URL
+        id: get-url
         run: |
-          az cdn endpoint purge \
-            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --profile-name stey-prod-cdn \
-            --name stey-prod \
-            --content-paths '/*'
-
-      - name: Deployment Summary
-        run: |
+          URL=$(az storage account show \
+            --name ${{ steps.deploy-infra.outputs.storageAccountName }} \
+            --query "primaryEndpoints.web" -o tsv)
+          echo "url=$URL" >> $GITHUB_OUTPUT
           echo "## 🚀 Deployment Complete!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**CDN URL:** ${{ needs.deploy-infra.outputs.cdnEndpointUrl }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Website URL:** $URL" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Storage Account:** ${{ needs.deploy-infra.outputs.storageAccountName }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Storage Account:** ${{ steps.deploy-infra.outputs.storageAccountName }}" >> $GITHUB_STEP_SUMMARY
